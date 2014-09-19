@@ -15,15 +15,16 @@ module.exports = function(grunt) {
         browserNoActivityTimeout: 50000,
         continuous: {
           background: false,
-          singleRun: false
+          singleRun: true
         },
         files: [
           'app/bower_components/angular/angular.js',
           'app/bower_components/angular-mocks/angular-mocks.js',
           'app/bower_components/angular-route/angular-route.js',
+          'app/*.js',
           'app/components/**/*.js',
           'app/view*//**/*.js',
-          'test/**/*.js'
+          'tests/**/*.js'
         ],
         frameworks: ['jasmine'],
         plugins: [
@@ -31,9 +32,17 @@ module.exports = function(grunt) {
           'karma-firefox-launcher',
           'karma-jasmine',
           'karma-junit-reporter',
+          'karma-htmlfile-reporter',
           'karma-phantomjs-launcher',
           'karma-safari-launcher'
-        ]
+        ],
+        reporters: [
+          'dots',
+          'html'
+        ],
+        htmlReporter: {
+          outputFile: 'tests/units.html'
+        }
       },
       auto: {
         autoWatch: true
